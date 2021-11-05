@@ -1,12 +1,13 @@
 import React from 'react'
 
 function Note(props) {
+    let {note} = props;
     return (
-        <div class={`card text-${props.textColor} bg-${props.bgColor} mb-3`} style={{ width: '400px', margin: '30px' }}>
-            <div class="card-header card-title">Title</div>
-            <div class="card-body">
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <p class="card-text"><small class="text">Last updated 3 mins ago</small></p>
+        <div className={`card text-${note.textColor} bg-${note.bgColor} mb-3`} style={{ width: '300px', margin: '15px' }}>
+            <div className="card-header card-title">{note.title}</div>
+            <div className="card-body">
+                <p className="card-text">{note.description}</p>
+                <p className="card-text"><small className="text">Last updated 3 mins ago</small></p>
             </div>
         </div>
     )

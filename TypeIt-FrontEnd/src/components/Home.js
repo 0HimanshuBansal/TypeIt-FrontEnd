@@ -1,10 +1,13 @@
 import React from 'react'
 import NotesContainer from './NotesContainer'
 
-function Home() {
+const Home = () => {
     return (
-        <div className="container">
-            <NotesContainer/>
+        <div>
+            <div className="d-grid gap-2 col-6 mx-auto">
+                <button className="btn btn-dark" type="button">Add Note</button>
+            </div>
+            <NotesContainer />
         </div>
     )
 }

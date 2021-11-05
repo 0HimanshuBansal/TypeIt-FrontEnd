@@ -1,9 +1,11 @@
 import './App.css';
+import FAQs from './components/FAQs';
+import Home from "./components/Home";
 import React from "react";
 import About from "./components/About";
-import Home from "./components/Home";
 import Navbar from './components/Navbar';
-import Note from './components/Note';
+import MyAccount from './components/MyAccount';
+import NoteState from './context/note/NoteState';
 
 import {
     BrowserRouter as Router,
@@ -11,22 +13,31 @@ import {
     Route
 } from "react-router-dom";
 
-function App() {
+const App = () => {
     return (<>
-        <Router>
-            <Navbar />
-            <Switch>
-                <Route exact path="/">
-                    <Home />
-                </Route>
-                <Route exact path="/about">
-                    <About />
-                </Route>
-                <Route exact path="/note">
-                    <Note textColor='white' bgColor='primary'/>
-                </Route>
-            </Switch>
-        </Router>
+        <NoteState>
+            <Router>
+                <Navbar />
+                <div className="pt-3" style={{backgroundColor:"#424242"}}>
+                    <div className="container">
+                        <Switch>
+                            <Route exact path="/">
+                                <Home />
+                            </Route>
+                            <Route exact path="/myAccount">
+                                <MyAccount />
+                            </Route>
+                            <Route exact path="/about">
+                                <About />
+                            </Route>
+                            <Route exact path="/faqs">
+                                <FAQs />
+                            </Route>
+                        </Switch>
+                    </div>
+                </div>
+            </Router>
+        </NoteState>
     </>
     );
 }
