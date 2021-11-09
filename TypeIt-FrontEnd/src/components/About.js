@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from 'react'
-import noteContext from '../context/note/noteContext'
+import React from 'react'
+// import React, { useContext, useEffect } from 'react'
+// import noteContext from '../context/note/noteContext'
 
 const About = () => {
     // const a = useContext(noteContext);
@@ -10,14 +11,12 @@ const About = () => {
 
     return (
         <div className="container my-3">
-            {/* About {a.state.name} year {a.state.year} */}
-            About
-            <p class="lh-sm">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
-            <p class="lh-sm">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
-            <p class="lh-sm">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
-            <p class="lh-sm">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
-            <p class="lh-sm">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
-            <p class="lh-sm">This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element. These classes can be customized as needed with our utility API.</p>
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">TypeIt</h5>
+                    <p class="card-text">We are an company that provides varous utility mobile-application and web-application for free, mostly.</p>
+                </div>
+            </div>
         </div>
     )
 }

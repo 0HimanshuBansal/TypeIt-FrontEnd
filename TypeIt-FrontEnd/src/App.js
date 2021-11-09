@@ -3,6 +3,7 @@ import FAQs from './components/FAQs';
 import Home from "./components/Home";
 import React from "react";
 import About from "./components/About";
+// import Alert from './components/Alert';
 import Navbar from './components/Navbar';
 import MyAccount from './components/MyAccount';
 import NoteState from './context/note/NoteState';
@@ -18,7 +19,7 @@ const App = () => {
         <NoteState>
             <Router>
                 <Navbar />
-                <div className="pt-3" style={{backgroundColor:"#424242"}}>
+                <div className="pt-3">
                     <div className="container">
                         <Switch>
                             <Route exact path="/">
@@ -35,6 +36,7 @@ const App = () => {
                             </Route>
                         </Switch>
                     </div>
+                    {/* <Alert message="" /> */}
                 </div>
             </Router>
         </NoteState>

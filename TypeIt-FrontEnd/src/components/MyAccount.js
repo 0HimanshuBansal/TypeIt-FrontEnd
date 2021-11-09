@@ -1,11 +1,10 @@
 import React from 'react'
 
-function MyAccount() {
+function MyAccount(props) {
     return (
         <div>
             Name
             calsss
-            
         </div>
     )
 }

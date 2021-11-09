@@ -11,7 +11,6 @@ const NoteState = (props) => {
       "tag": "General",
       "date": "2021-11-02T17:29:53.098Z",
       "__v": 0,
-      "textColor": "white",
       "bgColor": "primary"
     },
     {
@@ -22,7 +21,6 @@ const NoteState = (props) => {
       "tag": "General",
       "date": "2021-11-02T17:29:53.098Z",
       "__v": 0,
-      "textColor": "white",
       "bgColor": "secondary"
     },
     {
@@ -33,7 +31,6 @@ const NoteState = (props) => {
       "tag": "General",
       "date": "2021-11-02T17:29:53.098Z",
       "__v": 0,
-      "textColor": "white",
       "bgColor": "success"
     },
     {
@@ -44,7 +41,6 @@ const NoteState = (props) => {
       "tag": "General",
       "date": "2021-11-02T17:29:53.098Z",
       "__v": 0,
-      "textColor": "white",
       "bgColor": "danger"
     },
     {
@@ -55,7 +51,6 @@ const NoteState = (props) => {
       "tag": "General",
       "date": "2021-11-02T17:29:53.098Z",
       "__v": 0,
-      "textColor": "dark",
       "bgColor": "warning"
     },
     {
@@ -66,7 +61,6 @@ const NoteState = (props) => {
       "tag": "General",
       "date": "2021-11-02T17:29:53.098Z",
       "__v": 0,
-      "textColor": "dark",
       "bgColor": "info"
     },
     {
@@ -77,7 +71,6 @@ const NoteState = (props) => {
       "tag": "General",
       "date": "2021-11-02T17:29:53.098Z",
       "__v": 0,
-      "textColor": "dark",
       "bgColor": "light"
     },
     {
@@ -88,12 +81,37 @@ const NoteState = (props) => {
       "tag": "General",
       "date": "2021-11-02T17:29:53.098Z",
       "__v": 0,
-      "textColor": "white",
       "bgColor": "dark"
     }
   ];
 
   const [notes, setNotes] = useState(initialNotes);
+  //add a note
+  const addNote = (title, description, tag, bgColor) => {
+    var note = {
+      "_id": "61817591b4d42d6741108db9",
+      "user": "6180af5060f69229f55371e2",
+      "title": "Title1",
+      "description": "This is a long paragraph written to show how the line-height of an element is affected by our utilities. Classes are applied to the element itself or sometimes the parent element.",
+      "tag": "General",
+      "date": "2021-11-02T17:29:53.098Z",
+      "__v": 0,
+      "bgColor": "light"
+    };
+    setNotes(notes.push(note));
+  }
+
+  //edit a note
+  const editNote = (id) => {
+
+  }
+
+  //delete a note
+  const deleteNote = (id) => {
+
+  }
+
+
   // const s1 = {
   //     "name": "Himanshu",
   //     "year": "1999"
@@ -111,7 +129,7 @@ const NoteState = (props) => {
 
   return (
     // <NoteContext.Provider value={{state, updateState}}>
-    <NoteContext.Provider value={{ notes, setNotes }}>
+    <NoteContext.Provider value={{ notes, setNotes, addNote, editNote, deleteNote }}>
       {props.children}
     </NoteContext.Provider>
   )
