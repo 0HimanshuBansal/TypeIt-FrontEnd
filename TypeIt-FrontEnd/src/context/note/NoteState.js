@@ -37,14 +37,14 @@ const NoteState = (props) => {
   //edit a note
   const editNote = async (id, enote, color) => {
     const url = host + "/updateNote/" + id;
-    console.log(id + color);
+    // console.log(id + color);
     const response = await fetch(url, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjE4MGFmNTA2MGY2OTIyOWY1NTM3MWUyIn0sImlhdCI6MTYzNTgyNDczM30.9RonbqOtoDAVWj57RvIDHAlhx0MyGceI9QOXd5_ngOY'
       },
-      body: JSON.stringify({ title: enote.title, description: enote.description, tag: enote.tag, bgColor: color })
+      body: JSON.stringify({ title: enote.title, description: enote.description, tag: enote.tag, bgColor: color, date: Date.now() })
     });
     fetchNotes();
     await response.json();

@@ -31,6 +31,7 @@ function NotesContainer() {
     const saveNote = (event) => {
         event.preventDefault(); //to prevent page from reloading
         editNote(enote._id, enote, sBgColor);
+        setEnote({ title: "", description: "", tag: "", bgColor: "" })
     }
 
     return (
@@ -43,11 +44,12 @@ function NotesContainer() {
                     })
                 }
             </div>
+            {/*Edit Note*/}
             <div className="addNote modal fade" id="staticBackdrop-edit" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div className="addNote-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div className="addNote-content modal-content">
                         <div className="addNote-header modal-header">
-                            <input id="title" name="title" placeholder="Title" onChange={onChange} defaultValue={enote.title} />
+                            <input id="title" name="title" placeholder="Title" onChange={onChange} value={enote.title} />
                             <button type="button" className="btn btn-primary circleIt" onClick={function () { setsBgColor('primary') }}></button>
                             <button type="button" className="btn btn-secondary circleIt" onClick={function () { setsBgColor('secondary') }}></button>
                             <button type="button" className="btn btn-success circleIt" onClick={function () { setsBgColor('success') }}></button>
@@ -57,11 +59,11 @@ function NotesContainer() {
                             <button type="button" className="btn btn-dark circleIt" onClick={function () { setsBgColor('dark') }}></button>
                         </div>
                         <div className="addNote-body modal-body">
-                            <textarea id="description" name="description" defaultValue={enote.description} placeholder="Add note.." onChange={onChange} rows="5"></textarea>
+                            <textarea id="description" name="description" value={enote.description} placeholder="Add note.." onChange={onChange} rows="5"></textarea>
                         </div>
                         <div className="addNote-footer modal-footer">
                             <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="button" className="btn btn-dark" onClick={saveNote} data-bs-dismiss="modal">Save</button>
+                            <button disabled={enote.title.length === 0 || enote.description.length === 0} type="button" className="btn btn-dark" onClick={saveNote} data-bs-dismiss="modal">Save</button>
                         </div>
                     </div>
                 </div>

@@ -13,7 +13,7 @@ function Note(props) {
         textColor = 'text-white';
 
     return (
-        <div className={`card ${textColor} bg-${note.bgColor} mb-3`} style={{ width: '300px', margin: '15px' }}>
+        <div className={`card ${textColor} bg-${note.bgColor} mb-3`} style={{ width: '250px', margin: '15px' }}>
             <div className="card-header card-title">{note.title}</div>
             <div className="card-body">
                 <p className="card-text">{note.description}</p>
