@@ -11,10 +11,10 @@ const About = () => {
 
     return (
         <div className="container my-3">
-            <div class="card text-white bg-dark mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">TypeIt</h5>
-                    <p class="card-text">We are an company that provides varous utility mobile-application and web-application for free, mostly.</p>
+            <div className="card text-white bg-dark mb-3">
+                <div className="card-body">
+                    <h5 className="card-title">TypeIt</h5>
+                    <p className="card-text">We are an company that provides varous utility mobile-application and web-application for free, mostly.</p>
                 </div>
             </div>
         </div>
