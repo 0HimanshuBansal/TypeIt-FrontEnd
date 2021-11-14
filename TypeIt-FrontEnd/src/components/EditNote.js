@@ -1,19 +1,27 @@
-import React, { useContext, useEffect, useState } from 'react';
-import Note from './Note';
-import contextValue from '../context/note/noteContext';
+//this file is currently useless, as this component is directly written in "NotesContainer.js"
+//as setState is not working properly via  props, and i dont know other way around ¯\_(ツ)_/¯
 
-function NotesContainer() {
-    // console.log("NoteContainer is called");
-    const context = useContext(contextValue);
-    const { notes, fetchNotes, editNote } = context;
-    const [enote, setEnote] = useState({ title: "", description: "", tag: "", bgColor: "" })
+import React, { useContext, useState } from 'react'
+import noteContext from '../context/note/noteContext';
+
+const EditNote = (props) => {
+    const context = useContext(noteContext);
+    const { editNote } = context;
+    // const { propsNote, cancel } = props;
+    const { propsNote } = props;
+
+    const [enote, setNote] = useState({ title: "", description: "", bgColor: "" });
     const [sBgColor, setsBgColor] = useState(enote.bgColor);
 
-   useEffect(() => { fetchNotes(); }, []);
-    //if we call it directly, then it will call infinite times, and rerenders the comps;
+    const saveNote = (event) => {
+        event.preventDefault(); //to prevent page from reloading
+        console.log("EN : ", propsNote);
+        editNote(propsNote._id, enote, sBgColor);
+    }
 
-    const onChange = (event) => { setEnote({ ...enote, [event.target.name]: event.target.value }); }
+    const onChange = (event) => { setNote({ ...enote, [event.target.name]: event.target.value }); }
 
+    //to grow size of text area
     const tx = document.getElementsByTagName("textarea");
     for (let i = 0; i < tx.length; i++) {
         tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
@@ -24,25 +32,8 @@ function NotesContainer() {
         this.style.height = (this.scrollHeight) + "px";
     }
 
-    const updateNote = (currentNote) => {
-        setEnote(currentNote);
-    }
-
-    const saveNote = (event) => {
-        event.preventDefault(); //to prevent page from reloading
-        editNote(enote._id, enote, sBgColor);
-    }
-
     return (
         <>
-            {/* {<Loading />} */}
-            <div className="row">
-                {
-                    notes.map((note) => {
-                        return <Note key={note._id} updateNote={updateNote} note={note} />
-                    })
-                }
-            </div>
             <div className="addNote modal fade" id="staticBackdrop-edit" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div className="addNote-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div className="addNote-content modal-content">
@@ -66,9 +57,8 @@ function NotesContainer() {
                     </div>
                 </div>
             </div>
-
         </>
     )
 }
 
-export default NotesContainer
+export default EditNote

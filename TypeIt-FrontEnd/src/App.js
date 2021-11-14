@@ -1,7 +1,7 @@
 import './App.css';
 import FAQs from './components/FAQs';
 import Home from "./components/Home";
-import React from "react";
+import React from 'react';
 import About from "./components/About";
 // import Alert from './components/Alert';
 import Navbar from './components/Navbar';

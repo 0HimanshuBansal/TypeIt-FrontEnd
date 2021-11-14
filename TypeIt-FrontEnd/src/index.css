@@ -31,7 +31,7 @@ code {
 }
 
 .addNote input{
-  width: 100%;
+  width: 49%;
   border-style: none;
   border: none;
   word-wrap: break-word;
@@ -41,15 +41,14 @@ code {
   outline: none;
 }
 
-#description{
-  display: block;
+.addNote-body textarea{
   width: 100%;
+  min-height: 150px;
   border-style: none;
   border: none;
   word-wrap: break-word;
   resize: none;
   overflow: visible;
-  rows: 3;
 }
 
 .addNote textarea:focus{
@@ -63,7 +62,8 @@ code {
     flex-basis: auto;
     padding: 1rem;
     border-style: none;
-  }
+    max-height: 50vh;
+}
 
 .addNote-body:focus-within{
   outline: none;
@@ -80,4 +80,11 @@ code {
 
 .addNote-footer button{
   padding: 6px 12px;
+}
+
+.circleIt{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  margin: 0px 2px;
 }
