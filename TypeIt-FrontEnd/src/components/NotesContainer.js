@@ -3,13 +3,15 @@ import Note from './Note';
 import contextValue from '../context/note/noteContext';
 
 function NotesContainer() {
-    // console.log("NoteContainer is called");
     const context = useContext(contextValue);
     const { notes, fetchNotes, editNote } = context;
     const [enote, setEnote] = useState({ title: "", description: "", tag: "", bgColor: "" })
     const [sBgColor, setsBgColor] = useState(enote.bgColor);
 
-   useEffect(() => { fetchNotes(); }, []);
+    useEffect(() => {
+        fetchNotes();
+        //eslint-disabled-next-line
+    }, []);
     //if we call it directly, then it will call infinite times, and rerenders the comps;
 
     const onChange = (event) => { setEnote({ ...enote, [event.target.name]: event.target.value }); }
@@ -19,6 +21,7 @@ function NotesContainer() {
         tx[i].setAttribute("style", "height:" + (tx[i].scrollHeight) + "px;overflow-y:hidden;");
         tx[i].addEventListener("input", OnInput, false);
     }
+
     function OnInput() {
         this.style.height = "auto";
         this.style.height = (this.scrollHeight) + "px";
@@ -26,6 +29,7 @@ function NotesContainer() {
 
     const updateNote = (currentNote) => {
         setEnote(currentNote);
+        setsBgColor(currentNote.bgColor);
     }
 
     const saveNote = (event) => {
@@ -37,14 +41,15 @@ function NotesContainer() {
     return (
         <>
             {/* {<Loading />} */}
-            <div className="row">
-                {
-                    notes.map((note) => {
-                        return <Note key={note._id} updateNote={updateNote} note={note} />
-                    })
-                }
-            </div>
-            {/*Edit Note*/}
+            {notes.length > 0 &&
+                <div className="row">
+                    {
+                        notes.map((note) => {
+                            return <Note key={note._id} updateNote={updateNote} note={note} />
+                        })
+                    }
+                </div>
+            }
             <div className="addNote modal fade" id="staticBackdrop-edit" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div className="addNote-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable">
                     <div className="addNote-content modal-content">
@@ -68,7 +73,6 @@ function NotesContainer() {
                     </div>
                 </div>
             </div>
-
         </>
     )
 }

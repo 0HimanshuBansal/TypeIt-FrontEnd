@@ -8,11 +8,9 @@ export const AddNote = () => {
     const [sBgColor, setsBgColor] = useState("light");
     const [note, setNote] = useState({ title: "", description: "", tag: "default", bgColor: sBgColor });
 
-    function getDate() { return Date() }
-
     const saveNote = (event) => {
         event.preventDefault(); //to prevent page from reloading
-        addNote(note.title, note.description, note.tag, sBgColor, getDate);
+        addNote(note.title, note.description, note.tag, sBgColor);
         setNote({ title: "", description: "", tag: "default", sBgColor: "light"})
     }
 

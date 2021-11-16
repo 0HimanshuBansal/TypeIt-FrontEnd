@@ -16,7 +16,7 @@ function Note(props) {
         <div className={`card ${textColor} bg-${note.bgColor} mb-3`} style={{ width: '250px', margin: '15px' }}>
             <div className="card-header card-title">{note.title}</div>
             <div className="card-body">
-                <p className="card-text">{note.description}</p>
+                <p id="card-desc" className="card-text">{note.description}</p>
                 <p className="card-text"><small className="text">{note.date}</small></p>
             </div>
             <div className="card-footer d-flex">

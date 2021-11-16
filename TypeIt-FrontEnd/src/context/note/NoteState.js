@@ -12,7 +12,7 @@ const NoteState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjE4MGFmNTA2MGY2OTIyOWY1NTM3MWUyIn0sImlhdCI6MTYzNTgyNDczM30.9RonbqOtoDAVWj57RvIDHAlhx0MyGceI9QOXd5_ngOY'
+        'auth-token': localStorage.getItem('TypeItToken')
       }
     });
     const json = await response.json();
@@ -20,41 +20,50 @@ const NoteState = (props) => {
   }
 
   //add a note
-  const addNote = async (title, description, tag, bgColor, date) => {
+  const addNote = async (title, description, tag, bgColor) => {
     const url = host + "/addNote";
+    const d = new Date();
+    const date = d.toLocaleTimeString() + ", " + d.toDateString();
     const response = await fetch(url, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjE4MGFmNTA2MGY2OTIyOWY1NTM3MWUyIn0sImlhdCI6MTYzNTgyNDczM30.9RonbqOtoDAVWj57RvIDHAlhx0MyGceI9QOXd5_ngOY'
-      },
-      body: JSON.stringify({ title, description, tag, bgColor })
+      headers: { 'Content-Type': 'application/json', 'auth-token': localStorage.getItem('TypeItToken') },
+      body: JSON.stringify({ title, description, tag, bgColor, date })
     });
     const apiResponse = await response.json();
-    setNotes(notes.concat(apiResponse));
+    // console.log("apires", apiResponse);
+    // console.log("notes", notes);
+    if (notes.length > 0) setNotes(notes.concat(apiResponse));
+    else setNotes(apiResponse);
   }
 
   //edit a note
   const editNote = async (id, enote, color) => {
     const url = host + "/updateNote/" + id;
     // console.log(id + color);
+    const d = new Date();
+    const date = d.toLocaleTimeString() + ", " + d.toDateString();
     const response = await fetch(url, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjE4MGFmNTA2MGY2OTIyOWY1NTM3MWUyIn0sImlhdCI6MTYzNTgyNDczM30.9RonbqOtoDAVWj57RvIDHAlhx0MyGceI9QOXd5_ngOY'
+        'auth-token': localStorage.getItem('TypeItToken')
       },
-      body: JSON.stringify({ title: enote.title, description: enote.description, tag: enote.tag, bgColor: color, date: Date.now() })
+      body: JSON.stringify({ title: enote.title, description: enote.description, tag: enote.tag, bgColor: color, date: date })
     });
-    fetchNotes();
+    //    fetchNotes();
+    let newNotee = JSON.parse(JSON.stringify(notes));
     await response.json();
-    // const apiResponse = await response.json();
-    // const newNotee = notes.map((note) => { if (note._id === id){
-    //   note.title = apiResponse.title;
-    //   note.description = apiResponse.description;
-    //   note.bgColor = apiResponse.bgColor;
-    // } })
-    // setNotes(newNotee);
+    for (let i = 0; i < newNotee.length; i++) {
+      if (newNotee[i]._id === id) {
+        newNotee[i].title = enote.title;
+        newNotee[i].description = enote.description;
+        newNotee[i].tag = enote.tag;
+        newNotee[i].date = date;
+        newNotee[i].bgColor = color;
+        break;
+      }
+    }
+    setNotes(newNotee);
   }
 
   //delete a note
@@ -64,7 +73,7 @@ const NoteState = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjE4MGFmNTA2MGY2OTIyOWY1NTM3MWUyIn0sImlhdCI6MTYzNTgyNDczM30.9RonbqOtoDAVWj57RvIDHAlhx0MyGceI9QOXd5_ngOY'
+        'auth-token': localStorage.getItem('TypeItToken')
       }
     });
     await response.json();

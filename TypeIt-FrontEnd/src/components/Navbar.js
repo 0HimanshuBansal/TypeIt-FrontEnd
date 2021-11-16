@@ -4,9 +4,6 @@ import { Link, useLocation } from "react-router-dom";
 
 const Navbar = () => {
     let location = useLocation();
-    // useEffect(() => {
-    //     console.log(location);
-    // }, [location]);
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
@@ -31,6 +28,12 @@ const Navbar = () => {
                         </li>
                     </ul>
                 </div>
+                {localStorage.getItem('TypeItLoggedIn') === 'false' &&
+                    <div>
+                        <Link className={`btn btn-primary ${location.pathname === "/login" ? 'hideIt' : 'showIt'}`} type="button" to='/login'>Log In</Link>
+                        <Link className={`btn btn-primary ${location.pathname === "/signup" ? 'hideIt' : 'showIt'}`} type="button" to='/signup' style={{ marginLeft: "1em" }}>Sign Up</Link>
+                        {/* <Link className={`btn btn-primary ${location.pathname === "/" ? 'showIt' : 'hideIt'}`} type="button" to='/login' style={{marginLeft: '1em'}}>Log Out</Link> */}
+                    </div>}
             </div>
         </nav>
     )
