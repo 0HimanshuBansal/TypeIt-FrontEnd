@@ -1,9 +1,17 @@
-import React from 'react'
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-export const Alert = (props) => {
+const Alert = () => {
+    const { visible, message1, message2, type } = useSelector(state => state.alert);
     return (
-        <div className="alert alert-success fixed-bottom mx-3" role="alert">
-            Your not has been <strong>{props.message}</strong> successflly.
-        </div>
+        <>
+            {visible &&
+                <div className={`alert alert-${type} fixed-bottom mx-3`} role="alert">
+                    {message1} <strong> {message2} </strong> {type === 'danger' ? "" : " successflly"}.
+                </div>
+            }
+        </>
     )
 }
+
+export default Alert

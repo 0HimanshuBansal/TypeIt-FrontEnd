@@ -16,13 +16,10 @@ const Login = () => {
             body: JSON.stringify({ email: user.email, password: user.password })
         });
         const json = await response.json();
-        // console.log("login res", json);
         if (json.success === true) {
             // Save the auth token and redirect
             localStorage.setItem('TypeItToken', json.token);
             localStorage.setItem('TypeItLoggedIn', true);
-            console.log('TypeItToken : ', localStorage.getItem('TypeItToken'));
-            console.log('TypeItLoggedIn : ', localStorage.getItem('TypeItLoggedIn'));
             history.push("/");
         } else {
             alert("Invalid credentials");
@@ -31,7 +28,6 @@ const Login = () => {
 
     const onChange = (event1) => {
         setUser({ ...user, [event1.target.name]: event1.target.value });
-        // console.log(user.email, user.password);
     }
     //name[email], id[email] and the object name[email:] must be same
 

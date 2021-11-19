@@ -3,7 +3,7 @@ import FAQs from './components/FAQs';
 import Home from "./components/Home";
 import React from 'react';
 import About from "./components/About";
-// import Alert from './components/Alert';
+import Alert from './components/Alert';
 import Navbar from './components/Navbar';
 import MyAccount from './components/MyAccount';
 import NoteState from './context/note/NoteState';
@@ -50,7 +50,7 @@ const App = () => {
                                 </Route>
                             </Switch>
                         </div>
-                        {/* <Alert message="" /> */}
+                        <Alert/>
                     </div>
                 </Router>
             </NoteState>

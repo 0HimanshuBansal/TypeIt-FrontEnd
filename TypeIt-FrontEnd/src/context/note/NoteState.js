@@ -1,9 +1,29 @@
 import NoteContext from "./noteContext";
 import { useState } from "react";
+import actionCreators from '../../state/actionExport'
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
 
 const NoteState = (props) => {
+  const dispatch = useDispatch();
+  const { showDanger, showSuccess } = bindActionCreators(actionCreators, dispatch);
+
   const host = "http://localhost:5000/api/notes";
   const [notes, setNotes] = useState([]);
+
+  const success = (message) => {
+    showSuccess({ visible: true, message1: "Note", message2: message, type: "success" });
+    setTimeout(() => {
+      showSuccess({ visible: false, message1: "", message2: "", type: "" });
+    }, 1500);
+  }
+
+  const failed = (message) => {
+    showDanger({ visible: true, message1: "", message2: "Failed to " + message, type: "danger" });
+    setTimeout(() => {
+      showDanger({ visible: false, message1: "", message2: "", type: "" });
+    }, 1500);
+  }
 
   //fetchNotes
   const fetchNotes = async () => {
@@ -15,8 +35,13 @@ const NoteState = (props) => {
         'auth-token': localStorage.getItem('TypeItToken')
       }
     });
-    const json = await response.json();
-    setNotes(json);
+    const apiResponse = await response.json();
+    if (apiResponse.success === true) {
+      setNotes(apiResponse.notes);
+      console.log(apiResponse.notes);
+    } else {
+      failed("fetch user Notes");
+    }
   }
 
   //add a note
@@ -30,10 +55,16 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag, bgColor, date })
     });
     const apiResponse = await response.json();
-    // console.log("apires", apiResponse);
-    // console.log("notes", notes);
-    if (notes.length > 0) setNotes(notes.concat(apiResponse));
-    else setNotes(apiResponse);
+    console.log("apires : ", apiResponse.newNote);
+    if (apiResponse.success === true) {
+      if (notes.length > 0)
+        setNotes(notes.concat(apiResponse.newNote));
+      else
+        setNotes(apiResponse.newNote);
+      success("Added");
+    } else {
+      failed("Add Note");
+    }
   }
 
   //edit a note
@@ -52,18 +83,23 @@ const NoteState = (props) => {
     });
     //    fetchNotes();
     let newNotee = JSON.parse(JSON.stringify(notes));
-    await response.json();
-    for (let i = 0; i < newNotee.length; i++) {
-      if (newNotee[i]._id === id) {
-        newNotee[i].title = enote.title;
-        newNotee[i].description = enote.description;
-        newNotee[i].tag = enote.tag;
-        newNotee[i].date = date;
-        newNotee[i].bgColor = color;
-        break;
+    const apiResponse = await response.json();
+    if (apiResponse.success === true) {
+      for (let i = 0; i < newNotee.length; i++) {
+        if (newNotee[i]._id === id) {
+          newNotee[i].title = enote.title;
+          newNotee[i].description = enote.description;
+          newNotee[i].tag = enote.tag;
+          newNotee[i].date = date;
+          newNotee[i].bgColor = color;
+          break;
+        }
       }
+      setNotes(newNotee);
+      success("Updated");
+    } else {
+      failed("Edit Note");
     }
-    setNotes(newNotee);
   }
 
   //delete a note
@@ -76,10 +112,14 @@ const NoteState = (props) => {
         'auth-token': localStorage.getItem('TypeItToken')
       }
     });
-    await response.json();
-    // const apiResponse = await response.json();
-    const newNotes = notes.filter((note) => { return note._id !== id })
-    setNotes(newNotes)
+    const apiResponse = await response.json();
+    if (apiResponse.success === true) {
+      const newNotes = notes.filter((note) => { return note._id !== id })
+      setNotes(newNotes)
+      success("Deleted");
+    } else {
+      failed("Delete Note");
+    }
   }
 
   return (
