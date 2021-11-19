@@ -7,7 +7,7 @@ const Alert = () => {
         <>
             {visible &&
                 <div className={`alert alert-${type} fixed-bottom mx-3`} role="alert">
-                    {message1} <strong> {message2} </strong> {type === 'danger' ? "" : " successflly"}.
+                    {message1} <strong> {message2} </strong> {type === 'danger' ? "" : " successfully."}
                 </div>
             }
         </>

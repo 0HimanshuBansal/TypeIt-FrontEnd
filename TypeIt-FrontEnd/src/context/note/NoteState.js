@@ -19,7 +19,7 @@ const NoteState = (props) => {
   }
 
   const failed = (message) => {
-    showDanger({ visible: true, message1: "", message2: "Failed to " + message, type: "danger" });
+    showDanger({ visible: true, message1: "", message2: message, type: "danger" });
     setTimeout(() => {
       showDanger({ visible: false, message1: "", message2: "", type: "" });
     }, 1500);
@@ -40,7 +40,7 @@ const NoteState = (props) => {
       setNotes(apiResponse.notes);
       console.log(apiResponse.notes);
     } else {
-      failed("fetch user Notes");
+      failed("Failed to fetch user Notes.");
     }
   }
 
@@ -63,7 +63,7 @@ const NoteState = (props) => {
         setNotes(apiResponse.newNote);
       success("Added");
     } else {
-      failed("Add Note");
+      failed("Failed to Add Note.");
     }
   }
 
@@ -98,7 +98,7 @@ const NoteState = (props) => {
       setNotes(newNotee);
       success("Updated");
     } else {
-      failed("Edit Note");
+      failed("Failed to Edit Note.");
     }
   }
 
@@ -118,7 +118,7 @@ const NoteState = (props) => {
       setNotes(newNotes)
       success("Deleted");
     } else {
-      failed("Delete Note");
+      failed("Failed to Delete Note.");
     }
   }
 
