@@ -1,4 +1,3 @@
-# TypeIt-FrontEnd
+# TypeIt-FrontEnd - Arhchived
 
-#Archive
 this repo is now archived as i messed it up in learning process (O_0)
